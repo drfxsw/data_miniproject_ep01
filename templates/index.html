@@ -10,11 +10,76 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Welcome to the Dashboard</h2>
-    <!-- 3-4-1 -->
-    <a href="{% url 'sol' %}">Go to Sol Page</a><br>
-    <a href="{% url 'tack' %}">Go to Tack Page</a><br>
-    <a href="{% url 'jong' %}">Go to Jong Page</a><br>
-    <a href="{% url 'final' %}">Go to Final Page</a><br>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="display-4 fw-bold mb-3">폐암 사망률 분석 대시보드</h1>
+                    <p class="lead">폐암 사망률 예측 및 요인 분석 결과</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="container my-5 dashboard-section">
+        <div class="row g-4">
+            <!-- Sol Team Card -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-primary">Sol Team</h5>
+                        <p class="card-text text-muted flex-grow-1">
+                            태양팀의 폐암 사망률 예측 모델과 주요 위험인자 분석 결과를 확인해보세요
+                        </p>
+                        <!-- 3-4-1 -->
+                        <a href="{% url 'sol' %}" class="btn btn-outline-secondary mt-auto">분석 결과 보기</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tack Team Card -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-primary">Tack Team</h5>
+                        <p class="card-text text-muted flex-grow-1">
+                            별팀의 폐암 사망률과 환경적 요인 간의 상관관계 분석을 살펴보세요
+                        </p>
+                        <!-- 3-4-1 -->
+                        <a href="{% url 'tack' %}" class="btn btn-outline-secondary mt-auto">분석 결과 보기</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jong Team Card -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-primary">Jong Team</h5>
+                        <p class="card-text text-muted flex-grow-1">
+                            종팀의 폐암 사망률 지역별 분포와 인구통계학적 분석 결과를 확인해보세요
+                        </p>
+                        <!-- 3-4-1 -->
+                        <a href="{% url 'jong' %}" class="btn btn-outline-secondary mt-auto">분석 결과 보기</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Final Results Card -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-danger">Final Results</h5>
+                        <p class="card-text text-muted flex-grow-1">
+                            전체 팀의 폐암 사망률 분석을 종합한 최종 결론과 정책 제언을 확인하세요
+                        </p>
+                        <!-- 3-4-1 -->
+                        <a href="{% url 'final' %}" class="btn btn-danger mt-auto">종합 결론 보기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 </body>
 </html>

@@ -17,7 +17,16 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
+# 3-1-1
+from myapp import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+
+    # 3-1-2
+    path("", views.dashboard, name="dashboard"), # 기본 url경로에서 views의 dashboard 함수를 사용
+    path("sol/", views.sol, name = "sol"), # sol 이하의 url경로에서 views의 sol 함수를 사용
+    path("tack/", views.tack, name = "tack"), # tack 이하의 url경로에서 views의 tack 함수를 사용
+    path("jong/", views.jong, name = "jong"), # jong 이하의 url경로에서 views의 jong 함수를 사용
+    path('final/', views.final, name='final'),
 ]

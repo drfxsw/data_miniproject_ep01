@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # 2-1-1
+    "myapp"
 ]
 
 MIDDLEWARE = [
@@ -54,7 +56,8 @@ ROOT_URLCONF = "mainapp.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        # 2-1-2
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -65,13 +68,16 @@ TEMPLATES = [
         },
     },
 ]
-
+# 2-1-3
+STATIC_URL = "static/"
+# 2-1-4
+STATICFILES_DIRS = [BASE_DIR / "static"]
 WSGI_APPLICATION = "mainapp.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
+# 2-1-5 해당 프로젝트에서 사용하지않아 변경하지않음
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",

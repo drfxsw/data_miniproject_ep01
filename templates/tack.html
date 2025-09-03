@@ -11,10 +11,137 @@
     <title>진단 및 치료정보와 폐암사망률</title>
 </head>
 <body>
-    <h2>
-        진단 및 치료정보와 사망률이 유의미한 관계가 있다.
-    </h2>
-    <div class="chart">차트박스</div>
-    <p>설명 또는 내용(결론)</p>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="fw-bold">진단 및 치료정보와 사망률 분석</h2>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="hypothesis-section">
+            <ul>
+                {% for hypothesis in hypothesis_data %}
+                <li {% if forloop.first %}class="active"{% endif %}>
+                    <a href="javascript:void(0)" 
+                       class="hypothesis-link {% if forloop.first %}active{% endif %}" 
+                       data-target="hypo-{{ forloop.counter }}">
+                        {{ hypothesis.title }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- 가설별 캐러셀 -->
+        <div class="carousel">
+            {% for hypothesis in hypothesis_data %}
+            <div id="hypo-{{ forloop.counter }}" 
+                 class="hypothesis-card card p-4 mb-4 shadow-sm {% if forloop.first %}active show{% endif %}">
+                <h5 class="mb-3">
+                    <i class="fas fa-microscope me-2"></i>
+                    {{ hypothesis.title }}
+                </h5>
+
+                <!-- 차트 이미지들 -->
+                <div class="chart-images row">
+                    {% if hypothesis.images %}
+                        {% for chart in hypothesis.images %}
+                        <div class="chart-item col-lg-4 col-md-6">
+                            <div class="chart-image-container">
+                                <img src="{% static chart.path %}" 
+                                     alt="{{ chart.filename }}" 
+                                     class="chart-image img-fluid rounded"
+                                     loading="lazy">
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="no-images text-center text-muted col-12">
+                            <i class="fas fa-image fa-3x mb-3"></i>
+                            <p>해당 가설에 대한 차트 이미지가 없습니다.</p>
+                            <small>경로: {{ hypothesis.folder_path }}</small>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- 분석 결과 -->
+                {% if hypothesis.results %}
+                <div class="hypothesis-results mt-4">
+                    <h6 class="mb-3">
+                        <i class="fas fa-chart-bar me-2"></i>
+                        분석 결과
+                    </h6>
+                    <ul>
+                        {% for key, value in hypothesis.results.items %}
+                            <li><strong>{{ key|capfirst }}:</strong> {{ value }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% if hypothesis.conclusion %}
+                    <p class="result">
+                        <i class="fas fa-check-circle me-2"></i>
+                        {{ hypothesis.conclusion }}
+                    </p>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        
+    </div>
+
+    <!-- 캐러셀 JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hypothesisLinks = document.querySelectorAll('.hypothesis-link');
+            const hypothesisCards = document.querySelectorAll('.hypothesis-card');
+
+            // 첫 번째 가설을 기본으로 표시
+            showHypothesis('hypo-1');
+
+            // 각 링크에 클릭 이벤트 추가
+            hypothesisLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('data-target');
+                    
+                    // 모든 링크에서 active 클래스 제거
+                    document.querySelectorAll('.hypothesis-link').forEach(l => {
+                        l.classList.remove('active');
+                        l.parentElement.classList.remove('active');
+                    });
+                    
+                    // 클릭된 링크에 active 클래스 추가
+                    this.classList.add('active');
+                    this.parentElement.classList.add('active');
+                    
+                    // 해당 가설 카드 표시
+                    showHypothesis(targetId);
+                });
+            });
+
+            function showHypothesis(targetId) {
+                // 모든 카드 숨기기
+                hypothesisCards.forEach(card => {
+                    card.classList.remove('active', 'show');
+                });
+
+                // 대상 카드 표시
+                const targetCard = document.getElementById(targetId);
+                if (targetCard) {
+                    targetCard.classList.add('active');
+                    
+                    // 부드러운 애니메이션을 위한 지연
+                    setTimeout(() => {
+                        targetCard.classList.add('show');
+                    }, 50);
+                }
+            }
+        });
+    </script>
 </body>
 </html>

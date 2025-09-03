@@ -39,13 +39,34 @@ def dashboard(request):
     return render(request, "index.html", context) # 일반적으로 가장 root에 있는 html명은 index를 사용
 
 def sol(request):
-    return render(request, "sol.html") # sol에 해당하는 html 파일을 사용
+
+    # 가설데이터 불러오기
+    hypothesis_data = get_hypothesis_data('sol')
+
+    context = {
+        'hypothesis_data': hypothesis_data
+    }
+    return render(request, "sol.html", context) # sol에 해당하는 html 파일을 사용
 
 def tack(request):
-    return render(request, "tack.html") # tack에 해당하는 html 파일을 사용
+
+    # 가설데이터 불러오기
+    hypothesis_data = get_hypothesis_data('tack')
+
+    context = {
+        'hypothesis_data': hypothesis_data
+    }
+    return render(request, "tack.html", context) # tack에 해당하는 html 파일을 사용
 
 def jong(request):
-    return render(request, "jong.html") # jong에 해당하는 html 파일을 사용
+
+    # 가설데이터 불러오기
+    hypothesis_data = get_hypothesis_data('jong')
+
+    context = {
+        'hypothesis_data': hypothesis_data
+    }
+    return render(request, "jong.html", context) # jong에 해당하는 html 파일을 사용
 
 def final(request):
 
@@ -57,6 +78,7 @@ def final(request):
     }
     return render(request, "final.html", context) # final에 해당하는 html 파일을 사용
 
+# 가설 데이터 분류
 def get_hypothesis_data(page):
     if page == 'final':
         return hypothesis_data['final']
@@ -69,6 +91,7 @@ def get_hypothesis_data(page):
     else:
         return []
 
+# 가설 데이터
 hypothesis_data = {
     'final': [
                 {
@@ -117,5 +140,31 @@ hypothesis_data = {
                     },
                     'conclusion': '가설 1의 결과는 유의미합니다.'
                 },
-            ]
-        }
+            ],
+    'jong': [
+        {
+            'title': '가설 1',
+            'folder_path': 'images/jong_page/hypothesis_01',
+            'images': load_images_from_static('images/jong_page/hypothesis_01', 'chart'),
+            'results': {
+                'p_value': '0.05',
+                '적합도': '0.95',
+                '샘플수': '100',
+            },
+            'conclusion': '가설 1의 결과는 유의미합니다.'
+        },
+    ],
+    'tack': [
+        {
+            'title': '가설 1',
+            'folder_path': 'images/tack_page/hypothesis_01',
+            'images': load_images_from_static('images/tack_page/hypothesis_01', 'chart'),
+            'results': {
+                'p_value': '0.05',
+                '적합도': '0.95',
+                '샘플수': '100',
+            },
+            'conclusion': '가설 1의 결과는 유의미합니다.'
+        },
+    ]
+}

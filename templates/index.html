@@ -1,85 +1,134 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 4-2-1 -->
-    <link rel="stylesheet" href="/static/styles/main.css">
-    <!-- 4-2-2 bootstrap -->
+    <!-- 4-2-2 -->
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+    <!-- 4-2-3 bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <title>Document</title>
+    <title>2팀 분석 대시보드</title>
 </head>
 <body>
-    <!-- Hero Section -->
-    <div class="hero-section">
+    <!-- header -->
+     <header>
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h2 class="display-4 fw-bold mb-3">폐암 사망률 분석 대시보드</h1>
-                    <p class="lead">폐암 사망률 예측 및 요인 분석 결과</p>
+                    <h1 class="display-4 fw-bold mb-3">폐암 사망률 분석 대시보드</h1>
+                </div>
+            </div>
+        </div>
+     </header>
+
+    <!-- contents -->
+    <div class="container dashboard my-auto">
+        <div class="row g-4">
+             <!-- 5-2-2 Team Cards (반복문으로 처리) -->
+            {% for team in team_data %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 card-hover">
+                    <div class="card-body d-flex flex-column position-relative">
+                        <!-- 기본 내용 (제목과 리스트) -->
+                        <div class="card-main-content">
+                            <h5 class="card-title text-center">
+                                {{ team.title }}
+                            </h5>
+                            <div class='elements'>
+                                <ul>
+                                    {% for item in team.items %}
+                                    <li>{{ item }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- 호버 시 나타나는 내용 -->
+                        <div class="card-hover-content">
+                            <h5 class="text-primary mb-3">{{ team.team_number }}</h5>
+                            <p class="text-muted">{{ team.members }}</p>
+                        </div>
+                        
+                        <!-- 버튼 영역 (항상 클릭 가능) -->
+                        <div class="card-button-area">
+                            <a href="{% url team.url_name %}" class="btn btn-outline-secondary w-100">분석 결과 보기</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <!-- Final Results Card -->
+            <div class="col-lg-12 col-md-6">
+                <div class="card final-card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-center text-danger">전체</h5>
+                        <p class="card-text text-muted text-center flex-grow-1">
+                            전체요소를 모두 포함
+                        </p>
+                        <!-- 3-4-1 -->
+                        <a href="{% url 'final' %}" class="btn btn-danger mt-auto">분석 결과 보기</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Result -->
+             <!-- 최종 결론 섹션 -->
+            <div class="col-12 text-center mt-4">
+                <button id="conclusionBtn" class="btn btn-outline-primary btn-lg conclusion-toggle-btn">
+                    최종결론보기 ↓
+                </button>
+            </div>
+            
+            <!-- 결론 내용 (처음엔 숨겨짐) -->
+            <div class="col-12">
+                <div id="conclusionSection" class="conclusion-section">
+                    <div class="conclusion-content">
+                        <h3 class="text-center mb-4">최종 분석 결론</h3>
+                        <p class="lead">조기 발견과 적절한 치료가 생존율 향상의 핵심입니다</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const conclusionBtn = document.getElementById('conclusionBtn');
+            const conclusionSection = document.getElementById('conclusionSection');
+            
+            conclusionBtn.addEventListener('click', function() {
+                if (conclusionSection.classList.contains('show')) {
+                    // 숨기기
+                    conclusionSection.classList.remove('show');
+                    conclusionBtn.textContent = '최종결론보기 ↓';
+                    conclusionBtn.classList.remove('active');
+                } else {
+                    // 보이기
+                    conclusionSection.classList.add('show');
+                    conclusionBtn.textContent = '결론 숨기기 ↑';
+                    conclusionBtn.classList.add('active');
+                    
+                    // 부드럽게 스크롤
+                    setTimeout(() => {
+                        conclusionSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 200);
+                }
+            });
 
-    <!-- Dashboard Cards -->
-    <div class="container my-5 dashboard-section">
-        <div class="row g-4">
-            <!-- Sol Team Card -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card h-100">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-primary">Sol Team</h5>
-                        <p class="card-text text-muted flex-grow-1">
-                            태양팀의 폐암 사망률 예측 모델과 주요 위험인자 분석 결과를 확인해보세요
-                        </p>
-                        <!-- 3-4-1 -->
-                        <a href="{% url 'sol' %}" class="btn btn-outline-secondary mt-auto">분석 결과 보기</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tack Team Card -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card h-100">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-primary">Tack Team</h5>
-                        <p class="card-text text-muted flex-grow-1">
-                            별팀의 폐암 사망률과 환경적 요인 간의 상관관계 분석을 살펴보세요
-                        </p>
-                        <!-- 3-4-1 -->
-                        <a href="{% url 'tack' %}" class="btn btn-outline-secondary mt-auto">분석 결과 보기</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Jong Team Card -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card h-100">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-primary">Jong Team</h5>
-                        <p class="card-text text-muted flex-grow-1">
-                            종팀의 폐암 사망률 지역별 분포와 인구통계학적 분석 결과를 확인해보세요
-                        </p>
-                        <!-- 3-4-1 -->
-                        <a href="{% url 'jong' %}" class="btn btn-outline-secondary mt-auto">분석 결과 보기</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Final Results Card -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card h-100">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-danger">Final Results</h5>
-                        <p class="card-text text-muted flex-grow-1">
-                            전체 팀의 폐암 사망률 분석을 종합한 최종 결론과 정책 제언을 확인하세요
-                        </p>
-                        <!-- 3-4-1 -->
-                        <a href="{% url 'final' %}" class="btn btn-danger mt-auto">종합 결론 보기</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+            // 페이지 로드 애니메이션
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+    </script>
 </body>
 </html>

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from utils.image_loader import load_images_from_static
 
 # Create your views here.
 
@@ -47,4 +48,74 @@ def jong(request):
     return render(request, "jong.html") # jong에 해당하는 html 파일을 사용
 
 def final(request):
-    return render(request, "final.html") # final에 해당하는 html 파일을 사용
+
+    # 가설데이터 불러오기
+    hypothesis_data = get_hypothesis_data('final')
+    
+    context = {
+        'hypothesis_data': hypothesis_data
+    }
+    return render(request, "final.html", context) # final에 해당하는 html 파일을 사용
+
+def get_hypothesis_data(page):
+    if page == 'final':
+        return hypothesis_data['final']
+    elif page == 'sol':
+        return hypothesis_data['sol']
+    elif page == 'tack':
+        return hypothesis_data['tack']
+    elif page == 'jong':
+        return hypothesis_data['jong']
+    else:
+        return []
+
+hypothesis_data = {
+    'final': [
+                {
+                    'title': '가설 1', # 가설
+                    'folder_path': 'images/final_page/hypothesis_01', # 이미지파일 경로
+                    'images': load_images_from_static('images/final_page/hypothesis_01', 'chart'), #이미지파일경로, 파일명공통접두어
+                    'results': { # 표시되는 결과
+                        'p_value': '0.05',
+                        '적합도': '0.95',
+                        '샘플수': '100',
+                    },
+                    'conclusion': '가설 1의 결과는 유의미합니다.'
+                },
+                {
+                    'title': '가설 2',
+                    'folder_path': 'images/final_page/hypothesis_02',
+                    'images': load_images_from_static('images/final_page/hypothesis_02', 'chart'),
+                    'results': {
+                        'p_value': '0.02',
+                        '적합도': '0.45',
+                        '샘플수': '100',
+                    },
+                    'conclusion': '가설 2의 결과는 무의미합니다.'
+                },
+                {
+                    'title': '가설 3',
+                    'folder_path': 'images/final_page/hypothesis_03',
+                    'images': load_images_from_static('images/final_page/hypothesis_03', 'chart'),
+                    'results': {
+                        'p_value': '0.03',
+                        '적합도': '0.78',
+                        '샘플수': '100',
+                    },
+                    'conclusion': '가설 3의 결과는 유의미합니다.'
+                }
+            ],
+    'sol': [
+                {
+                    'title': '가설 1',
+                    'folder_path': 'images/sol_page/hypothesis_01',
+                    'images': load_images_from_static('images/sol_page/hypothesis_01', 'chart'),
+                    'results': {
+                        'p_value': '0.05',
+                        '적합도': '0.95',
+                        '샘플수': '100',
+                    },
+                    'conclusion': '가설 1의 결과는 유의미합니다.'
+                },
+            ]
+        }

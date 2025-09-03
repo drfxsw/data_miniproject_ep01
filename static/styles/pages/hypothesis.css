@@ -1,0 +1,129 @@
+/* 캐러셀 관련 스타일 */
+.hypothesis-section ul {
+    list-style: none;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.hypothesis-section li {
+    background: var(--card-bg, #f8f9fa);
+    border: 2px solid var(--card-border, #dee2e6);
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.hypothesis-link {
+    display: block;
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    color: var(--text-primary, #333);
+    font-weight: 600;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.hypothesis-link:hover {
+    background: var(--accent-blue, #007bff);
+    color: white;
+    text-decoration: none;
+}
+
+.hypothesis-link.active {
+    background: var(--accent-blue, #007bff);
+    color: white;
+}
+
+.hypothesis-section li.active {
+    border-color: var(--accent-blue, #007bff);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+/* 캐러셀 카드들 */
+.carousel {
+    position: relative;
+    min-height: 500px;
+}
+
+.hypothesis-card {
+    display: none;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.4s ease;
+}
+
+.hypothesis-card.active {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.hypothesis-card.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* 차트 이미지 스타일 */
+.chart-images {
+    margin: 1.5rem 0;
+}
+
+.chart-item {
+    margin-bottom: 1rem;
+}
+
+.chart-image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.chart-image-container:hover {
+    transform: scale(1.02);
+}
+
+.chart-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.hypothesis-results ul {
+    list-style: none;
+    padding: 0;
+}
+
+.hypothesis-results li {
+    background: var(--card-bg, #f8f9fa);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--card-border, #dee2e6);
+}
+
+.result {
+    background: #d1edff;
+    border: 1px solid #0ea5e9;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.no-images {
+    padding: 2rem;
+    border: 2px dashed #dee2e6;
+    border-radius: 10px;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .hypothesis-section ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .chart-images .col-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}

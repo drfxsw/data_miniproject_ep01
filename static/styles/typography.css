@@ -1,10 +1,23 @@
 /* 글자관련 스타일 */
+h1,h2,h3,h4,h5,h6,a,p,div,span,li,button {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--text-primary);
+}
+
 header h1 {
-            background: var(--gradient-accent);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 700;
-            font-size: 2.8rem;
-            text-shadow: 0 4px 20px rgba(79, 172, 254, 0.3);
-        }
+    background: var(--gradient-accent);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    font-size: 2.8rem;
+    text-shadow: 0 4px 20px rgba(79, 172, 254, 0.3);
+    margin: 2rem 0;
+}
+
+header h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 1.5rem 0 1rem;
+}

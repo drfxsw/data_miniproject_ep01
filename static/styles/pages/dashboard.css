@@ -222,8 +222,18 @@
 }
 
 .dashboard .conclusion-section.show {
-    max-height: 800px;
+    max-height: none;
     padding: 40px 20px;
+}
+
+thead tr th {
+            background-color: rgba(15, 23, 42, 0.6) !important;
+            color: var(--text-primary) !important;
+        }
+        
+tbody tr td {
+    background-color: var(--bs-card-color) !important;
+    color: var(--text-secondary) !important;
 }
 
 /* 반응형 */

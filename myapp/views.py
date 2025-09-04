@@ -32,8 +32,13 @@ def dashboard(request):
         }
     ]
 
+    # 종합결론 설명용 차트
+    images= load_images_from_static('images/dashboard', 'chart') #이미지파일경로, 파일명공통접두어
+
+
     context = {
-        'team_data': team_data
+        'team_data': team_data,
+        'images': images
     }
     # 3-2-2
     return render(request, "index.html", context) # 일반적으로 가장 root에 있는 html명은 index를 사용

@@ -7,9 +7,6 @@
 @import url('buttons.css');
 @import url('cards.css');
 
-/* 페이지별 맞춤 */
-@import url('pages/dashboard.css');
-@import url('pages/hypothesis.css');
 
 :root {
             --primary-dark: #0f172a;

@@ -60,12 +60,17 @@
                 <div class="chart-images row">
                     {% if hypothesis.images %}
                         {% for chart in hypothesis.images %}
-                        <div class="chart-item col-lg-4 col-md-6">
-                            <div class="chart-image-container">
+                        <div class="chart-item col-lg-6 col-md-12">
+                            <div class="chart-image-container" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#imageModal"
+                                data-image-src="{% static chart.path %}"
+                                data-image-title="{{ chart.filename }}"
+                                style="cursor: pointer;">
                                 <img src="{% static chart.path %}" 
-                                     alt="{{ chart.filename }}" 
-                                     class="chart-image img-fluid rounded"
-                                     loading="lazy">
+                                    alt="{{ chart.filename }}" 
+                                    class="chart-image img-fluid rounded"
+                                    loading="lazy">
                             </div>
                         </div>
                         {% endfor %}
@@ -111,9 +116,22 @@
             </div>
             {% endfor %}
         </div>
-        
     </div>
 
+    <!-- Bootstrap Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-secondary">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="modalImage" src="" alt="" class="img-fluid w-100" style="max-height: 80vh; object-fit: contain;">
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
     const hypothesisSection = document.getElementById('hypothesisSection');
@@ -257,6 +275,35 @@
         }
     }
 });
-</script>
+    // 이미지 모달 기능
+    const imageModal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('imageModalLabel');
+    const downloadBtn = document.getElementById('downloadBtn');
+
+    let currentImageSrc = '';
+    let currentImageTitle = '';
+
+    imageModal.addEventListener('show.bs.modal', function(event) {
+        const trigger = event.relatedTarget;
+        currentImageSrc = trigger.getAttribute('data-image-src');
+        currentImageTitle = trigger.getAttribute('data-image-title') || '이미지';
+        
+        modalImage.src = currentImageSrc;
+        modalImage.alt = currentImageTitle;
+        modalTitle.textContent = currentImageTitle;
+    });
+
+    downloadBtn.addEventListener('click', function() {
+        if (currentImageSrc) {
+            const link = document.createElement('a');
+            link.href = currentImageSrc;
+            link.download = currentImageTitle || 'image';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    });
+    </script>
 </body>
 </html>

@@ -75,692 +75,730 @@
             <div class="col-12">
                 <div id="conclusionSection" class="conclusion-section">
                     <div class="conclusion-content">
+                        <h3 class="text-center">전체 데이터 종합 분석 결과</h3>
+                        <!-- 차트 이미지들 -->
+                        <div class="chart-images row">
+                            {% if images %}
+                                {% for chart in images %}
+                                <div class="chart-item col-lg-6 col-md-12">
+                                    <div class="chart-image-container" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#imageModal"
+                                        data-image-src="{% static chart.path %}"
+                                        data-image-title="{{ chart.filename }}"
+                                        style="cursor: pointer;">
+                                        <img src="{% static chart.path %}" 
+                                            alt="{{ chart.filename }}" 
+                                            class="chart-image img-fluid rounded"
+                                            loading="lazy">
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            {% else %}
+                            <!-- 차트 이미지 없을경우 대체 -->
+                                <div class="no-images text-center text-muted col-12">
+                                    <i class="fas fa-image fa-3x mb-3"></i>
+                                    <p>해당 가설에 대한 차트 이미지가 없습니다.</p>
+                                    <small>경로: {{ hypothesis.folder_path }}</small>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <!-- 분석 테이블 -->
                         <div class="row">
-            <!-- Gender 분석 -->
-            <div class="col-lg-12 col-xl-6 mb-3">
-                <div class="card analysis-card h-100">
-                    <div class="card-body">
-                        <div class="table-title">
-                            <h5 class="">📊 Gender 분석</h5>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-hover ">
-                                <thead>
-                                    <tr>
-                                        <th>구분</th>
-                                        <th>총환자수</th>
-                                        <th>생존자수</th>
-                                        <th>생존율</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Female</strong></td>
-                                        <td>524,997</td>
-                                        <td>114,995</td>
-                                        <td class="survival-rate">21.90%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Male</strong></td>
-                                        <td>523,578</td>
-                                        <td>115,137</td>
-                                        <td class="survival-rate">21.99%</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="description-box p-3">
-                            <div class="description-item">
-                                <span class="fw-bold">📈 생존율 범위:</span> 0.0009 (0.09%)
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">🧪 카이제곱 검정 p-value:</span> 0.285745
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">🎯 통계적 유의성:</span> 
-                                <span class="badge bg-secondary significance-badge">유의하지 않음</span>
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">⚠️ 의심스러운 균등성:</span> 
-                                <span class="badge btn-warning-custom significance-badge">예</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Cancer Stage 분석 -->
-            <div class="col-lg-12 col-xl-6 mb-3">
-                <div class="card analysis-card h-100">
-                    <div class="card-body">
-                        <div class="table-title">
-                            <h5>📊 Cancer Stage 분석</h5>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-hover ">
-                                <thead>
-                                    <tr>
-                                        <th>구분</th>
-                                        <th>총환자수</th>
-                                        <th>생존자수</th>
-                                        <th>생존율</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Stage I</strong></td>
-                                        <td>262,068</td>
-                                        <td>57,507</td>
-                                        <td class="survival-rate">21.94%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Stage II</strong></td>
-                                        <td>262,357</td>
-                                        <td>57,541</td>
-                                        <td class="survival-rate">21.93%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Stage III</strong></td>
-                                        <td>262,196</td>
-                                        <td>57,526</td>
-                                        <td class="survival-rate">21.94%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Stage IV</strong></td>
-                                        <td>261,954</td>
-                                        <td>57,558</td>
-                                        <td class="survival-rate">21.97%</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="description-box p-3">
-                            <div class="description-item">
-                                <span class="fw-bold">📈 생존율 범위:</span> 0.0004 (0.04%)
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">🧪 카이제곱 검정 p-value:</span> 0.986355
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">🎯 통계적 유의성:</span> 
-                                <span class="badge bg-secondary significance-badge">유의하지 않음</span>
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">⚠️ 의심스러운 균등성:</span> 
-                                <span class="badge btn-warning-custom significance-badge">예</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Family History 분석 -->
-            <div class="col-lg-12 col-xl-6 mb-3">
-                <div class="card analysis-card h-100">
-                    <div class="card-body">
-                        <div class="table-title">
-                            <h5 class="">📊 Family History 분석</h5>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-hover ">
-                                <thead>
-                                    <tr>
-                                        <th>구분</th>
-                                        <th>총환자수</th>
-                                        <th>생존자수</th>
-                                        <th>생존율</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>No</strong></td>
-                                        <td>524,074</td>
-                                        <td>114,819</td>
-                                        <td class="survival-rate">21.91%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Yes</strong></td>
-                                        <td>524,501</td>
-                                        <td>115,313</td>
-                                        <td class="survival-rate">21.99%</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="description-box p-3">
-                            <div class="description-item">
-                                <span class="fw-bold">📈 생존율 범위:</span> 0.0008 (0.08%)
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">🧪 카이제곱 검정 p-value:</span> 0.346137
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">🎯 통계적 유의성:</span> 
-                                <span class="badge bg-secondary significance-badge">유의하지 않음</span>
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">⚠️ 의심스러운 균등성:</span> 
-                                <span class="badge btn-warning-custom significance-badge">예</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Smoking Status 분석 -->
-            <div class="col-lg-12 col-xl-6 mb-3">
-                <div class="card analysis-card h-100">
-                    <div class="card-body">
-                        <div class="table-title">
-                            <h5 class="">📊 Smoking Status 분석</h5>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-hover ">
-                                <thead>
-                                    <tr>
-                                        <th>구분</th>
-                                        <th>총환자수</th>
-                                        <th>생존자수</th>
-                                        <th>생존율</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Current Smoker</strong></td>
-                                        <td>262,060</td>
-                                        <td>57,433</td>
-                                        <td class="survival-rate">21.92%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Former Smoker</strong></td>
-                                        <td>261,789</td>
-                                        <td>57,390</td>
-                                        <td class="survival-rate">21.92%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Never Smoked</strong></td>
-                                        <td>262,160</td>
-                                        <td>57,640</td>
-                                        <td class="survival-rate">21.99%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Passive Smoker</strong></td>
-                                        <td>262,566</td>
-                                        <td>57,669</td>
-                                        <td class="survival-rate">21.96%</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="description-box p-3">
-                            <div class="description-item">
-                                <span class="fw-bold">📈 생존율 범위:</span> 0.0007 (0.07%)
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">🧪 카이제곱 검정 p-value:</span> 0.913813
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">🎯 통계적 유의성:</span> 
-                                <span class="badge bg-secondary significance-badge">유의하지 않음</span>
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">⚠️ 의심스러운 균등성:</span> 
-                                <span class="badge btn-warning-custom significance-badge">예</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Treatment Type 분석 -->
-            <div class="col-lg-12 col-xl-6 mb-3">
-                <div class="card analysis-card h-100">
-                    <div class="card-body">
-                        <div class="table-title">
-                            <h5 class="">📊 Treatment Type 분석</h5>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-hover ">
-                                <thead>
-                                    <tr>
-                                        <th>구분</th>
-                                        <th>총환자수</th>
-                                        <th>생존자수</th>
-                                        <th>생존율</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Chemotherapy</strong></td>
-                                        <td>262,628</td>
-                                        <td>57,670</td>
-                                        <td class="survival-rate">21.96%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Combined</strong></td>
-                                        <td>261,666</td>
-                                        <td>57,085</td>
-                                        <td class="survival-rate">21.82%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Radiation</strong></td>
-                                        <td>261,855</td>
-                                        <td>57,566</td>
-                                        <td class="survival-rate">21.98%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Surgery</strong></td>
-                                        <td>262,426</td>
-                                        <td>57,811</td>
-                                        <td class="survival-rate">22.03%</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="description-box p-3">
-                            <div class="description-item">
-                                <span class="fw-bold">📈 생존율 범위:</span> 0.0021 (0.21%)
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">🧪 카이제곱 검정 p-value:</span> 0.273216
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">🎯 통계적 유의성:</span> 
-                                <span class="badge bg-secondary significance-badge">유의하지 않음</span>
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">⚠️ 의심스러운 균등성:</span> 
-                                <span class="badge btn-warning-custom significance-badge">예</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Age Group 분석 -->
-            <div class="col-lg-12 col-xl-6 mb-3">
-                <div class="card analysis-card h-100">
-                    <div class="card-body">
-                        <div class="table-title">
-                            <h5 class="">📊 Age Group 분석</h5>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-hover ">
-                                <thead>
-                                    <tr>
-                                        <th>구분</th>
-                                        <th>총환자수</th>
-                                        <th>생존자수</th>
-                                        <th>생존율</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Young(&lt;40)</strong></td>
-                                        <td>76,904</td>
-                                        <td>16,819</td>
-                                        <td class="survival-rate">21.87%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Middle(40-55)</strong></td>
-                                        <td>468,253</td>
-                                        <td>102,504</td>
-                                        <td class="survival-rate">21.89%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Senior(55-70)</strong></td>
-                                        <td>439,960</td>
-                                        <td>96,938</td>
-                                        <td class="survival-rate">22.03%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Elderly(70+)</strong></td>
-                                        <td>63,456</td>
-                                        <td>13,870</td>
-                                        <td class="survival-rate">21.86%</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="description-box p-3">
-                            <div class="description-item">
-                                <span class="fw-bold">📈 생존율 범위:</span> 0.0017 (0.17%)
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">🧪 카이제곱 검정 p-value:</span> 0.341812
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">🎯 통계적 유의성:</span> 
-                                <span class="badge bg-secondary significance-badge">유의하지 않음</span>
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">⚠️ 의심스러운 균등성:</span> 
-                                <span class="badge btn-warning-custom significance-badge">예</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- BMI Category 분석 -->
-            <div class="col-lg-12 col-xl-6 mb-3">
-                <div class="card analysis-card h-100">
-                    <div class="card-body">
-                        <div class="table-title">
-                            <h5 class="">📊 BMI Category 분석</h5>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-hover ">
-                                <thead>
-                                    <tr>
-                                        <th>구분</th>
-                                        <th>총환자수</th>
-                                        <th>생존자수</th>
-                                        <th>생존율</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Underweight</strong></td>
-                                        <td>92,228</td>
-                                        <td>20,312</td>
-                                        <td class="survival-rate">22.02%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Normal</strong></td>
-                                        <td>235,826</td>
-                                        <td>51,774</td>
-                                        <td class="survival-rate">21.95%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Overweight</strong></td>
-                                        <td>180,845</td>
-                                        <td>39,593</td>
-                                        <td class="survival-rate">21.89%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Obese</strong></td>
-                                        <td>539,676</td>
-                                        <td>118,453</td>
-                                        <td class="survival-rate">21.95%</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="description-box p-3">
-                            <div class="description-item">
-                                <span class="fw-bold">📈 생존율 범위:</span> 0.0013 (0.13%)
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">🧪 카이제곱 검정 p-value:</span> 0.889732
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">🎯 통계적 유의성:</span> 
-                                <span class="badge bg-secondary significance-badge">유의하지 않음</span>
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">⚠️ 의심스러운 균등성:</span> 
-                                <span class="badge btn-warning-custom significance-badge">예</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Cholesterol Category 분석 -->
-            <div class="col-lg-12 col-xl-6 mb-3">
-                <div class="card analysis-card h-100">
-                    <div class="card-body">
-                        <div class="table-title">
-                            <h5 class="">📊 Cholesterol Category 분석</h5>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-hover ">
-                                <thead>
-                                    <tr>
-                                        <th>구분</th>
-                                        <th>총환자수</th>
-                                        <th>생존자수</th>
-                                        <th>생존율</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Normal</strong></td>
-                                        <td>285,359</td>
-                                        <td>62,605</td>
-                                        <td class="survival-rate">21.94%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Borderline</strong></td>
-                                        <td>227,945</td>
-                                        <td>50,050</td>
-                                        <td class="survival-rate">21.96%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>High</strong></td>
-                                        <td>535,271</td>
-                                        <td>117,477</td>
-                                        <td class="survival-rate">21.95%</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="description-box p-3">
-                            <div class="description-item">
-                                <span class="fw-bold">📈 생존율 범위:</span> 0.0002 (0.02%)
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">🧪 카이제곱 검정 p-value:</span> 0.988059
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">🎯 통계적 유의성:</span> 
-                                <span class="badge bg-secondary significance-badge">유의하지 않음</span>
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">⚠️ 의심스러운 균등성:</span> 
-                                <span class="badge btn-warning-custom significance-badge">예</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Comorbidity Category 분석 -->
-            <div class="col-lg-12 col-xl-6 mb-3">
-                <div class="card analysis-card h-100">
-                    <div class="card-body">
-                        <div class="table-title">
-                            <h5 class="">📊 Comorbidity Category 분석</h5>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-hover ">
-                                <thead>
-                                    <tr>
-                                        <th>구분</th>
-                                        <th>총환자수</th>
-                                        <th>생존자수</th>
-                                        <th>생존율</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>None</strong></td>
-                                        <td>145,073</td>
-                                        <td>31,605</td>
-                                        <td class="survival-rate">21.79%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Single</strong></td>
-                                        <td>349,474</td>
-                                        <td>76,817</td>
-                                        <td class="survival-rate">21.98%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Multiple</strong></td>
-                                        <td>414,498</td>
-                                        <td>91,179</td>
-                                        <td class="survival-rate">22.00%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Severe</strong></td>
-                                        <td>139,530</td>
-                                        <td>30,531</td>
-                                        <td class="survival-rate">21.88%</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="description-box p-3">
-                            <div class="description-item">
-                                <span class="fw-bold">📈 생존율 범위:</span> 0.0021 (0.21%)
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">🧪 카이제곱 검정 p-value:</span> 0.333129
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">🎯 통계적 유의성:</span> 
-                                <span class="badge bg-secondary significance-badge">유의하지 않음</span>
-                            </div>
-                            <div class="description-item">
-                                <span class="fw-bold">⚠️ 의심스러운 균등성:</span> 
-                                <span class="badge btn-warning-custom significance-badge">예</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Major Country 분석 -->
-            <div class="col-12 mb-4">
-                <div class="card analysis-card">
-                    <div class="card-body">
-                        <div class="table-title">
-                            <h5 class="">📊 Major Country 분석</h5>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-hover ">
-                                <thead>
-                                    <tr>
-                                        <th>구분</th>
-                                        <th>총환자수</th>
-                                        <th>생존자수</th>
-                                        <th>생존율</th>
-                                        <th>구분</th>
-                                        <th>총환자수</th>
-                                        <th>생존자수</th>
-                                        <th>생존율</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Croatia</strong></td>
-                                        <td>38,900</td>
-                                        <td>8,567</td>
-                                        <td class="survival-rate">22.02%</td>
-                                        <td><strong>Lithuania</strong></td>
-                                        <td>38,964</td>
-                                        <td>8,543</td>
-                                        <td class="survival-rate">21.93%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Cyprus</strong></td>
-                                        <td>38,972</td>
-                                        <td>8,617</td>
-                                        <td class="survival-rate">22.11%</td>
-                                        <td><strong>Malta</strong></td>
-                                        <td>38,971</td>
-                                        <td>8,529</td>
-                                        <td class="survival-rate">21.89%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Czech Republic</strong></td>
-                                        <td>39,187</td>
-                                        <td>8,642</td>
-                                        <td class="survival-rate">22.05%</td>
-                                        <td><strong>Netherlands</strong></td>
-                                        <td>38,899</td>
-                                        <td>8,657</td>
-                                        <td class="survival-rate">22.26%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Denmark</strong></td>
-                                        <td>39,056</td>
-                                        <td>8,503</td>
-                                        <td class="survival-rate">21.77%</td>
-                                        <td><strong>Poland</strong></td>
-                                        <td>39,166</td>
-                                        <td>8,533</td>
-                                        <td class="survival-rate">21.79%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Hungary</strong></td>
-                                        <td>39,020</td>
-                                        <td>8,568</td>
-                                        <td class="survival-rate">21.96%</td>
-                                        <td><strong>Other</strong></td>
-                                        <td>658,476</td>
-                                        <td>144,555</td>
-                                        <td class="survival-rate">21.95%</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Italy</strong></td>
-                                        <td>38,964</td>
-                                        <td>8,418</td>
-                                        <td class="survival-rate">21.60%</td>
-                                        <td colspan="4"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="description-box p-3">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="description-item">
-                                        <span class="fw-bold">📈 생존율 범위:</span> 0.0066 (0.66%)
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="description-item">
-                                        <span class="fw-bold">🧪 카이제곱 검정 p-value:</span> 0.703931
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="description-item">
-                                        <span class="fw-bold">🎯 통계적 유의성:</span> 
-                                        <span class="badge bg-secondary significance-badge">유의하지 않음</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="description-item">
-                                        <span class="fw-bold">⚠️ 의심스러운 균등성:</span> 
-                                        <span class="badge btn-warning-custom significance-badge">예</span>
+                            <!-- Gender 분석 -->
+                            <div class="col-lg-12 col-xl-6 mb-3">
+                                <div class="card analysis-card h-100">
+                                    <div class="card-body">
+                                        <div class="table-title">
+                                            <h5 class="">📊 Gender 분석</h5>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover ">
+                                                <thead>
+                                                    <tr>
+                                                        <th>구분</th>
+                                                        <th>총환자수</th>
+                                                        <th>생존자수</th>
+                                                        <th>생존율</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>Female</strong></td>
+                                                        <td>524,997</td>
+                                                        <td>114,995</td>
+                                                        <td class="survival-rate">21.90%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Male</strong></td>
+                                                        <td>523,578</td>
+                                                        <td>115,137</td>
+                                                        <td class="survival-rate">21.99%</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="description-box p-3">
+                                            <div class="description-item">
+                                                <span class="fw-bold">📈 생존율 범위:</span> 0.0009 (0.09%)
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">🧪 카이제곱 검정 p-value:</span> 0.285745
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">🎯 통계적 유의성:</span> 
+                                                <span class="badge bg-secondary significance-badge">유의하지 않음</span>
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">⚠️ 의심스러운 균등성:</span> 
+                                                <span class="badge btn-warning-custom significance-badge">예</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- 종합 요약 -->
-        <div class="row mt-5">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header bg-dark">
-                        <h4 class="">
-                            <i class="fas fa-exclamation-triangle me-2"></i>
-                            종합 결론
-                        </h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="alert d-flex align-items-center" role="alert">
-                            <i class="fas fa-info-circle me-3"></i>
-                            <div>
-                                <strong>모든 변수에서 통계적으로 유의하지 않은 결과가 나타났으며, 
-                                의심스러운 균등성이 발견되었습니다.</strong><br>
-                                이는 데이터의 품질이나 실험 설계에 문제가 있을 가능성을 시사합니다.
+                            <!-- Cancer Stage 분석 -->
+                            <div class="col-lg-12 col-xl-6 mb-3">
+                                <div class="card analysis-card h-100">
+                                    <div class="card-body">
+                                        <div class="table-title">
+                                            <h5>📊 Cancer Stage 분석</h5>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover ">
+                                                <thead>
+                                                    <tr>
+                                                        <th>구분</th>
+                                                        <th>총환자수</th>
+                                                        <th>생존자수</th>
+                                                        <th>생존율</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>Stage I</strong></td>
+                                                        <td>262,068</td>
+                                                        <td>57,507</td>
+                                                        <td class="survival-rate">21.94%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Stage II</strong></td>
+                                                        <td>262,357</td>
+                                                        <td>57,541</td>
+                                                        <td class="survival-rate">21.93%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Stage III</strong></td>
+                                                        <td>262,196</td>
+                                                        <td>57,526</td>
+                                                        <td class="survival-rate">21.94%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Stage IV</strong></td>
+                                                        <td>261,954</td>
+                                                        <td>57,558</td>
+                                                        <td class="survival-rate">21.97%</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="description-box p-3">
+                                            <div class="description-item">
+                                                <span class="fw-bold">📈 생존율 범위:</span> 0.0004 (0.04%)
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">🧪 카이제곱 검정 p-value:</span> 0.986355
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">🎯 통계적 유의성:</span> 
+                                                <span class="badge bg-secondary significance-badge">유의하지 않음</span>
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">⚠️ 의심스러운 균등성:</span> 
+                                                <span class="badge btn-warning-custom significance-badge">예</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Family History 분석 -->
+                            <div class="col-lg-12 col-xl-6 mb-3">
+                                <div class="card analysis-card h-100">
+                                    <div class="card-body">
+                                        <div class="table-title">
+                                            <h5 class="">📊 Family History 분석</h5>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover ">
+                                                <thead>
+                                                    <tr>
+                                                        <th>구분</th>
+                                                        <th>총환자수</th>
+                                                        <th>생존자수</th>
+                                                        <th>생존율</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>No</strong></td>
+                                                        <td>524,074</td>
+                                                        <td>114,819</td>
+                                                        <td class="survival-rate">21.91%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Yes</strong></td>
+                                                        <td>524,501</td>
+                                                        <td>115,313</td>
+                                                        <td class="survival-rate">21.99%</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="description-box p-3">
+                                            <div class="description-item">
+                                                <span class="fw-bold">📈 생존율 범위:</span> 0.0008 (0.08%)
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">🧪 카이제곱 검정 p-value:</span> 0.346137
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">🎯 통계적 유의성:</span> 
+                                                <span class="badge bg-secondary significance-badge">유의하지 않음</span>
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">⚠️ 의심스러운 균등성:</span> 
+                                                <span class="badge btn-warning-custom significance-badge">예</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Smoking Status 분석 -->
+                            <div class="col-lg-12 col-xl-6 mb-3">
+                                <div class="card analysis-card h-100">
+                                    <div class="card-body">
+                                        <div class="table-title">
+                                            <h5 class="">📊 Smoking Status 분석</h5>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover ">
+                                                <thead>
+                                                    <tr>
+                                                        <th>구분</th>
+                                                        <th>총환자수</th>
+                                                        <th>생존자수</th>
+                                                        <th>생존율</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>Current Smoker</strong></td>
+                                                        <td>262,060</td>
+                                                        <td>57,433</td>
+                                                        <td class="survival-rate">21.92%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Former Smoker</strong></td>
+                                                        <td>261,789</td>
+                                                        <td>57,390</td>
+                                                        <td class="survival-rate">21.92%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Never Smoked</strong></td>
+                                                        <td>262,160</td>
+                                                        <td>57,640</td>
+                                                        <td class="survival-rate">21.99%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Passive Smoker</strong></td>
+                                                        <td>262,566</td>
+                                                        <td>57,669</td>
+                                                        <td class="survival-rate">21.96%</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="description-box p-3">
+                                            <div class="description-item">
+                                                <span class="fw-bold">📈 생존율 범위:</span> 0.0007 (0.07%)
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">🧪 카이제곱 검정 p-value:</span> 0.913813
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">🎯 통계적 유의성:</span> 
+                                                <span class="badge bg-secondary significance-badge">유의하지 않음</span>
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">⚠️ 의심스러운 균등성:</span> 
+                                                <span class="badge btn-warning-custom significance-badge">예</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Treatment Type 분석 -->
+                            <div class="col-lg-12 col-xl-6 mb-3">
+                                <div class="card analysis-card h-100">
+                                    <div class="card-body">
+                                        <div class="table-title">
+                                            <h5 class="">📊 Treatment Type 분석</h5>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover ">
+                                                <thead>
+                                                    <tr>
+                                                        <th>구분</th>
+                                                        <th>총환자수</th>
+                                                        <th>생존자수</th>
+                                                        <th>생존율</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>Chemotherapy</strong></td>
+                                                        <td>262,628</td>
+                                                        <td>57,670</td>
+                                                        <td class="survival-rate">21.96%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Combined</strong></td>
+                                                        <td>261,666</td>
+                                                        <td>57,085</td>
+                                                        <td class="survival-rate">21.82%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Radiation</strong></td>
+                                                        <td>261,855</td>
+                                                        <td>57,566</td>
+                                                        <td class="survival-rate">21.98%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Surgery</strong></td>
+                                                        <td>262,426</td>
+                                                        <td>57,811</td>
+                                                        <td class="survival-rate">22.03%</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="description-box p-3">
+                                            <div class="description-item">
+                                                <span class="fw-bold">📈 생존율 범위:</span> 0.0021 (0.21%)
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">🧪 카이제곱 검정 p-value:</span> 0.273216
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">🎯 통계적 유의성:</span> 
+                                                <span class="badge bg-secondary significance-badge">유의하지 않음</span>
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">⚠️ 의심스러운 균등성:</span> 
+                                                <span class="badge btn-warning-custom significance-badge">예</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Age Group 분석 -->
+                            <div class="col-lg-12 col-xl-6 mb-3">
+                                <div class="card analysis-card h-100">
+                                    <div class="card-body">
+                                        <div class="table-title">
+                                            <h5 class="">📊 Age Group 분석</h5>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover ">
+                                                <thead>
+                                                    <tr>
+                                                        <th>구분</th>
+                                                        <th>총환자수</th>
+                                                        <th>생존자수</th>
+                                                        <th>생존율</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>Young(&lt;40)</strong></td>
+                                                        <td>76,904</td>
+                                                        <td>16,819</td>
+                                                        <td class="survival-rate">21.87%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Middle(40-55)</strong></td>
+                                                        <td>468,253</td>
+                                                        <td>102,504</td>
+                                                        <td class="survival-rate">21.89%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Senior(55-70)</strong></td>
+                                                        <td>439,960</td>
+                                                        <td>96,938</td>
+                                                        <td class="survival-rate">22.03%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Elderly(70+)</strong></td>
+                                                        <td>63,456</td>
+                                                        <td>13,870</td>
+                                                        <td class="survival-rate">21.86%</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="description-box p-3">
+                                            <div class="description-item">
+                                                <span class="fw-bold">📈 생존율 범위:</span> 0.0017 (0.17%)
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">🧪 카이제곱 검정 p-value:</span> 0.341812
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">🎯 통계적 유의성:</span> 
+                                                <span class="badge bg-secondary significance-badge">유의하지 않음</span>
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">⚠️ 의심스러운 균등성:</span> 
+                                                <span class="badge btn-warning-custom significance-badge">예</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- BMI Category 분석 -->
+                            <div class="col-lg-12 col-xl-6 mb-3">
+                                <div class="card analysis-card h-100">
+                                    <div class="card-body">
+                                        <div class="table-title">
+                                            <h5 class="">📊 BMI Category 분석</h5>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover ">
+                                                <thead>
+                                                    <tr>
+                                                        <th>구분</th>
+                                                        <th>총환자수</th>
+                                                        <th>생존자수</th>
+                                                        <th>생존율</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>Underweight</strong></td>
+                                                        <td>92,228</td>
+                                                        <td>20,312</td>
+                                                        <td class="survival-rate">22.02%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Normal</strong></td>
+                                                        <td>235,826</td>
+                                                        <td>51,774</td>
+                                                        <td class="survival-rate">21.95%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Overweight</strong></td>
+                                                        <td>180,845</td>
+                                                        <td>39,593</td>
+                                                        <td class="survival-rate">21.89%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Obese</strong></td>
+                                                        <td>539,676</td>
+                                                        <td>118,453</td>
+                                                        <td class="survival-rate">21.95%</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="description-box p-3">
+                                            <div class="description-item">
+                                                <span class="fw-bold">📈 생존율 범위:</span> 0.0013 (0.13%)
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">🧪 카이제곱 검정 p-value:</span> 0.889732
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">🎯 통계적 유의성:</span> 
+                                                <span class="badge bg-secondary significance-badge">유의하지 않음</span>
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">⚠️ 의심스러운 균등성:</span> 
+                                                <span class="badge btn-warning-custom significance-badge">예</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Cholesterol Category 분석 -->
+                            <div class="col-lg-12 col-xl-6 mb-3">
+                                <div class="card analysis-card h-100">
+                                    <div class="card-body">
+                                        <div class="table-title">
+                                            <h5 class="">📊 Cholesterol Category 분석</h5>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover ">
+                                                <thead>
+                                                    <tr>
+                                                        <th>구분</th>
+                                                        <th>총환자수</th>
+                                                        <th>생존자수</th>
+                                                        <th>생존율</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>Normal</strong></td>
+                                                        <td>285,359</td>
+                                                        <td>62,605</td>
+                                                        <td class="survival-rate">21.94%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Borderline</strong></td>
+                                                        <td>227,945</td>
+                                                        <td>50,050</td>
+                                                        <td class="survival-rate">21.96%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>High</strong></td>
+                                                        <td>535,271</td>
+                                                        <td>117,477</td>
+                                                        <td class="survival-rate">21.95%</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="description-box p-3">
+                                            <div class="description-item">
+                                                <span class="fw-bold">📈 생존율 범위:</span> 0.0002 (0.02%)
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">🧪 카이제곱 검정 p-value:</span> 0.988059
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">🎯 통계적 유의성:</span> 
+                                                <span class="badge bg-secondary significance-badge">유의하지 않음</span>
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">⚠️ 의심스러운 균등성:</span> 
+                                                <span class="badge btn-warning-custom significance-badge">예</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Comorbidity Category 분석 -->
+                            <div class="col-lg-12 col-xl-6 mb-3">
+                                <div class="card analysis-card h-100">
+                                    <div class="card-body">
+                                        <div class="table-title">
+                                            <h5 class="">📊 Comorbidity Category 분석</h5>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover ">
+                                                <thead>
+                                                    <tr>
+                                                        <th>구분</th>
+                                                        <th>총환자수</th>
+                                                        <th>생존자수</th>
+                                                        <th>생존율</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>None</strong></td>
+                                                        <td>145,073</td>
+                                                        <td>31,605</td>
+                                                        <td class="survival-rate">21.79%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Single</strong></td>
+                                                        <td>349,474</td>
+                                                        <td>76,817</td>
+                                                        <td class="survival-rate">21.98%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Multiple</strong></td>
+                                                        <td>414,498</td>
+                                                        <td>91,179</td>
+                                                        <td class="survival-rate">22.00%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Severe</strong></td>
+                                                        <td>139,530</td>
+                                                        <td>30,531</td>
+                                                        <td class="survival-rate">21.88%</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="description-box p-3">
+                                            <div class="description-item">
+                                                <span class="fw-bold">📈 생존율 범위:</span> 0.0021 (0.21%)
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">🧪 카이제곱 검정 p-value:</span> 0.333129
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">🎯 통계적 유의성:</span> 
+                                                <span class="badge bg-secondary significance-badge">유의하지 않음</span>
+                                            </div>
+                                            <div class="description-item">
+                                                <span class="fw-bold">⚠️ 의심스러운 균등성:</span> 
+                                                <span class="badge btn-warning-custom significance-badge">예</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Major Country 분석 -->
+                            <div class="col-12 mb-4">
+                                <div class="card analysis-card">
+                                    <div class="card-body">
+                                        <div class="table-title">
+                                            <h5 class="">📊 Major Country 분석</h5>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover ">
+                                                <thead>
+                                                    <tr>
+                                                        <th>구분</th>
+                                                        <th>총환자수</th>
+                                                        <th>생존자수</th>
+                                                        <th>생존율</th>
+                                                        <th>구분</th>
+                                                        <th>총환자수</th>
+                                                        <th>생존자수</th>
+                                                        <th>생존율</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>Croatia</strong></td>
+                                                        <td>38,900</td>
+                                                        <td>8,567</td>
+                                                        <td class="survival-rate">22.02%</td>
+                                                        <td><strong>Lithuania</strong></td>
+                                                        <td>38,964</td>
+                                                        <td>8,543</td>
+                                                        <td class="survival-rate">21.93%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Cyprus</strong></td>
+                                                        <td>38,972</td>
+                                                        <td>8,617</td>
+                                                        <td class="survival-rate">22.11%</td>
+                                                        <td><strong>Malta</strong></td>
+                                                        <td>38,971</td>
+                                                        <td>8,529</td>
+                                                        <td class="survival-rate">21.89%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Czech Republic</strong></td>
+                                                        <td>39,187</td>
+                                                        <td>8,642</td>
+                                                        <td class="survival-rate">22.05%</td>
+                                                        <td><strong>Netherlands</strong></td>
+                                                        <td>38,899</td>
+                                                        <td>8,657</td>
+                                                        <td class="survival-rate">22.26%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Denmark</strong></td>
+                                                        <td>39,056</td>
+                                                        <td>8,503</td>
+                                                        <td class="survival-rate">21.77%</td>
+                                                        <td><strong>Poland</strong></td>
+                                                        <td>39,166</td>
+                                                        <td>8,533</td>
+                                                        <td class="survival-rate">21.79%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Hungary</strong></td>
+                                                        <td>39,020</td>
+                                                        <td>8,568</td>
+                                                        <td class="survival-rate">21.96%</td>
+                                                        <td><strong>Other</strong></td>
+                                                        <td>658,476</td>
+                                                        <td>144,555</td>
+                                                        <td class="survival-rate">21.95%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Italy</strong></td>
+                                                        <td>38,964</td>
+                                                        <td>8,418</td>
+                                                        <td class="survival-rate">21.60%</td>
+                                                        <td colspan="4"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="description-box p-3">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="description-item">
+                                                        <span class="fw-bold">📈 생존율 범위:</span> 0.0066 (0.66%)
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="description-item">
+                                                        <span class="fw-bold">🧪 카이제곱 검정 p-value:</span> 0.703931
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="description-item">
+                                                        <span class="fw-bold">🎯 통계적 유의성:</span> 
+                                                        <span class="badge bg-secondary significance-badge">유의하지 않음</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="description-item">
+                                                        <span class="fw-bold">⚠️ 의심스러운 균등성:</span> 
+                                                        <span class="badge btn-warning-custom significance-badge">예</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                            <!-- 종합 요약 -->
+                            <div class="row mt-5">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header bg-dark">
+                                            <h4 class="">
+                                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                                종합 결론
+                                            </h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="alert d-flex align-items-center" role="alert">
+                                                <i class="fas fa-info-circle me-3"></i>
+                                                <div>
+                                                    <p>
+                                                        폐암 환자의 생존율을 병기별로 분석한 결과, 약 22%로 큰 차이가 없음을 확인할 수 있었습니다. <br />
+                                                        또한, 15개 컬럼 각각의 생존율을 분석했을 때도 모든 컬럼에서 동일하게 약 22%의 생존율이 나타나, 어떤 변수도 생존율에 유의미한 영향을 미치지 않는 것으로 보입니다.<br /> 
+                                                        이러한 결과는 해당 데이터가 인위적으로 합성된 데이터일 가능성이 높음을 시사합니다.<br />
+                                                        실제로 원본 사이트에서도 This dataset contains artificially generated data with as close a representation of reality as possible. <br />
+                                                        라고 명시하고 있어, 본 데이터는 실제 환자 데이터를 기반으로 한 연구에는 적합하지 않을 수 있습니다.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -768,50 +806,88 @@
             </div>
         </div>
     </div>
-                    </div>
+    <!-- Bootstrap Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-secondary">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="modalImage" src="" alt="" class="img-fluid w-100" style="max-height: 80vh; object-fit: contain;">
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const conclusionBtn = document.getElementById('conclusionBtn');
-            const conclusionSection = document.getElementById('conclusionSection');
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 결론 버튼 기능
+    const conclusionBtn = document.getElementById('conclusionBtn');
+    const conclusionSection = document.getElementById('conclusionSection');
+    
+    conclusionBtn.addEventListener('click', function() {
+        if (conclusionSection.classList.contains('show')) {
+            conclusionSection.classList.remove('show');
+            conclusionBtn.textContent = '최종결론보기 ↓';
+            conclusionBtn.classList.remove('active');
+        } else {
+            conclusionSection.classList.add('show');
+            conclusionBtn.textContent = '결론 숨기기 ↑';
+            conclusionBtn.classList.add('active');
             
-            conclusionBtn.addEventListener('click', function() {
-                if (conclusionSection.classList.contains('show')) {
-                    // 숨기기
-                    conclusionSection.classList.remove('show');
-                    conclusionBtn.textContent = '최종결론보기 ↓';
-                    conclusionBtn.classList.remove('active');
-                } else {
-                    // 보이기
-                    conclusionSection.classList.add('show');
-                    conclusionBtn.textContent = '결론 숨기기 ↑';
-                    conclusionBtn.classList.add('active');
-                    
-                    // 부드럽게 스크롤
-                    setTimeout(() => {
-                        conclusionSection.scrollIntoView({ 
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }, 200);
-                }
-            });
+            setTimeout(() => {
+                conclusionSection.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 200);
+        }
+    });
 
-            // 페이지 로드 애니메이션
-            const cards = document.querySelectorAll('.card');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(30px)';
-                setTimeout(() => {
-                    card.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, index * 200);
-            });
-        });
-    </script>
+    // 이미지 모달 기능
+    const imageModal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('imageModalLabel');
+    const downloadBtn = document.getElementById('downloadBtn');
+    
+    let currentImageSrc = '';
+    let currentImageTitle = '';
+    
+    imageModal.addEventListener('show.bs.modal', function(event) {
+        console.log('모달 열림'); // 디버깅용
+        const trigger = event.relatedTarget;
+        currentImageSrc = trigger.getAttribute('data-image-src');
+        currentImageTitle = trigger.getAttribute('data-image-title') || '이미지';
+        
+        modalImage.src = currentImageSrc;
+        modalImage.alt = currentImageTitle;
+        modalTitle.textContent = currentImageTitle;
+    });
+    
+    downloadBtn.addEventListener('click', function() {
+        if (currentImageSrc) {
+            const link = document.createElement('a');
+            link.href = currentImageSrc;
+            link.download = currentImageTitle || 'image';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    });
+    
+    // 페이지 로드 애니메이션
+    const cards = document.querySelectorAll('.card');
+    cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        setTimeout(() => {
+            card.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, index * 200);
+    });
+});
+</script>
 </body>
 </html>

@@ -162,22 +162,28 @@ hypothesis_data = {
                 },
             ],
     'jong': [
-                {
-                    'title': '가설 1',
-                    'hypothesis': {
-                                'h0': '귀무가설 내용',
-                                'h1': '대립가설 내용'
-                            },
-                    'folder_path': 'images/jong_page/hypothesis_01',
-                    'images': load_images_from_static('images/jong_page/hypothesis_01', 'chart'),
-                    'results': {
-                        'p_value': '0.05',
-                        '적합도': '0.95',
-                        '샘플수': '100',
-                    },
-                    'conclusion': '가설 1의 결과는 유의미합니다.',
-                    'result': '~~~~~~해서 여러모로 해봤으나 뭐 그러함'
-                },
+        {
+            'title': '고혈압은 폐암 생존율에 영향을 미친다',
+            'folder_path': 'images/jong_page/hypothesis_01',
+            'images': load_images_from_static('images/jong_page/hypothesis_01', 'chart'),
+            'results': {
+                'p_value': '0.0477',
+                '적합도': '0.7803',
+                '샘플수': '3,250,000',
+            },
+            'conclusion': '고혈압은 폐암 생존율과 연관성이 있다.'
+        },
+        {
+            'title': '다른 암은 폐암 생존율에 영향을 미친다',
+            'folder_path': 'images/jong_page/hypothesis_02',
+            'images': load_images_from_static('images/jong_page/hypothesis_02', 'chart'),
+            'results': {
+                'p_value': '0.026',
+                '적합도': '0.7803',
+                '샘플수': '3,250,000',
+            },
+            'conclusion': '다른 암 보유 여부는 폐암 생존율과 연관성이 있다.'
+        },
     ],
     'tack': [
                 {

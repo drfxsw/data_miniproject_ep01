@@ -96,6 +96,10 @@ hypothesis_data = {
     'final': [
                 {
                     'title': '가설 1', # 가설
+                    'hypothesis': {
+                        'h0': '귀무가설 내용',
+                        'h1': '대립가설 내용'
+                    },
                     'folder_path': 'images/final_page/hypothesis_01', # 이미지파일 경로
                     'images': load_images_from_static('images/final_page/hypothesis_01', 'chart'), #이미지파일경로, 파일명공통접두어
                     'results': { # 표시되는 결과
@@ -103,10 +107,15 @@ hypothesis_data = {
                         '적합도': '0.95',
                         '샘플수': '100',
                     },
-                    'conclusion': '가설 1의 결과는 유의미합니다.'
+                    'conclusion': '가설 1의 결과는 유의미합니다.',
+                    'result': '~~~~~~해서 여러모로 해봤으나 뭐 그러함'
                 },
                 {
                     'title': '가설 2',
+                    'hypothesis': {
+                        'h0': '귀무가설 내용',
+                        'h1': '대립가설 내용'
+                    },
                     'folder_path': 'images/final_page/hypothesis_02',
                     'images': load_images_from_static('images/final_page/hypothesis_02', 'chart'),
                     'results': {
@@ -114,10 +123,15 @@ hypothesis_data = {
                         '적합도': '0.45',
                         '샘플수': '100',
                     },
-                    'conclusion': '가설 2의 결과는 무의미합니다.'
+                    'conclusion': '가설 2의 결과는 무의미합니다.',
+                    'result': '~~~~~~해서 여러모로 해봤으나 뭐 그러함'
                 },
                 {
                     'title': '가설 3',
+                    'hypothesis': {
+                        'h0': '귀무가설 내용',
+                        'h1': '대립가설 내용'
+                    },
                     'folder_path': 'images/final_page/hypothesis_03',
                     'images': load_images_from_static('images/final_page/hypothesis_03', 'chart'),
                     'results': {
@@ -125,12 +139,17 @@ hypothesis_data = {
                         '적합도': '0.78',
                         '샘플수': '100',
                     },
-                    'conclusion': '가설 3의 결과는 유의미합니다.'
+                    'conclusion': '가설 3의 결과는 유의미합니다.',
+                    'result': '~~~~~~해서 여러모로 해봤으나 뭐 그러함'
                 }
             ],
     'sol': [
                 {
                     'title': '가설 1',
+                    'hypothesis': {
+                        'h0': '귀무가설 내용',
+                        'h1': '대립가설 내용'
+                    },
                     'folder_path': 'images/sol_page/hypothesis_01',
                     'images': load_images_from_static('images/sol_page/hypothesis_01', 'chart'),
                     'results': {
@@ -138,33 +157,44 @@ hypothesis_data = {
                         '적합도': '0.95',
                         '샘플수': '100',
                     },
-                    'conclusion': '가설 1의 결과는 유의미합니다.'
+                    'conclusion': '가설 1의 결과는 유의미합니다.',
+                    'result': '~~~~~~해서 여러모로 해봤으나 뭐 그러함'
                 },
             ],
     'jong': [
-        {
-            'title': '가설 1',
-            'folder_path': 'images/jong_page/hypothesis_01',
-            'images': load_images_from_static('images/jong_page/hypothesis_01', 'chart'),
-            'results': {
-                'p_value': '0.05',
-                '적합도': '0.95',
-                '샘플수': '100',
-            },
-            'conclusion': '가설 1의 결과는 유의미합니다.'
-        },
+                {
+                    'title': '가설 1',
+                    'hypothesis': {
+                                'h0': '귀무가설 내용',
+                                'h1': '대립가설 내용'
+                            },
+                    'folder_path': 'images/jong_page/hypothesis_01',
+                    'images': load_images_from_static('images/jong_page/hypothesis_01', 'chart'),
+                    'results': {
+                        'p_value': '0.05',
+                        '적합도': '0.95',
+                        '샘플수': '100',
+                    },
+                    'conclusion': '가설 1의 결과는 유의미합니다.',
+                    'result': '~~~~~~해서 여러모로 해봤으나 뭐 그러함'
+                },
     ],
     'tack': [
-        {
-            'title': '가설 1',
-            'folder_path': 'images/tack_page/hypothesis_01',
-            'images': load_images_from_static('images/tack_page/hypothesis_01', 'chart'),
-            'results': {
-                'p_value': '0.05',
-                '적합도': '0.95',
-                '샘플수': '100',
-            },
-            'conclusion': '가설 1의 결과는 유의미합니다.'
-        },
+                {
+                    'title': '가설 1',
+                    'hypothesis': {
+                                'h0': '귀무가설 내용',
+                                'h1': '대립가설 내용'
+                            },
+                    'folder_path': 'images/tack_page/hypothesis_01',
+                    'images': load_images_from_static('images/tack_page/hypothesis_01', 'chart'),
+                    'results': {
+                        'p_value': '0.05',
+                        '적합도': '0.95',
+                        '샘플수': '100',
+                    },
+                    'conclusion': '가설 1의 결과는 유의미합니다.',
+                    'result': '~~~~~~해서 여러모로 해봤으나 뭐 그러함'
+                },
     ]
 }

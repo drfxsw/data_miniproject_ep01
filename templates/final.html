@@ -6,10 +6,195 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 4-2-2 -->
     <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+    <!-- 4-2-4 -->
+    <link rel="stylesheet" href="{% static 'styles/pages/hypothesis.css' %}">
     <!-- 4-2-3 bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <!-- Font Awesome -->
+    <!-- 4-2-3 Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 드롭다운으로 보이게 하는 스타일 */
+        .hypothesis-section {
+            position: relative;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .hypothesis-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background: var(--card-bg, #f8f9fa);
+            border: 2px solid var(--card-border, #dee2e6);
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .hypothesis-section ul::after {
+            content: '\f107';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            color: var(--accent-blue, #007bff);
+            pointer-events: none;
+        }
+
+        .hypothesis-section li {
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            transition: all 0.3s ease;
+        }
+
+        .hypothesis-section li:first-child {
+            border-radius: 12px 12px 0 0;
+        }
+
+        .hypothesis-section li:last-child {
+            border-radius: 0 0 12px 12px;
+        }
+
+        .hypothesis-section li:not(:first-child) {
+            max-height: 0;
+            opacity: 0;
+            transform: translateY(-10px);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hypothesis-section.open li:not(:first-child) {
+            max-height: 100px;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hypothesis-section ul::after {
+            transition: transform 0.3s ease;
+        }
+
+        .hypothesis-section.open ul::after {
+            transform: rotate(180deg);
+        }
+
+        .hypothesis-link {
+            display: block;
+            padding: 1rem 3rem 1rem 1.5rem;
+            color: var(--text-primary, #333);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .hypothesis-section li:last-child .hypothesis-link {
+            border-bottom: none;
+        }
+
+        .hypothesis-section li:first-child .hypothesis-link {
+            cursor: pointer;
+        }
+
+        .hypothesis-link:hover {
+            background: var(--accent-blue, #007bff);
+            color: white;
+            text-decoration: none;
+        }
+
+        .hypothesis-link.active {
+            background: var(--accent-blue, #007bff);
+            color: white;
+        }
+
+        /* 애니메이션이 개선된 캐러셀 */
+        .carousel {
+            position: relative;
+        }
+
+        .hypothesis-card {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+
+        .hypothesis-card.active {
+            position: relative;
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+
+        /* 차트 이미지 스타일 */
+        .chart-images {
+            margin: 1.5rem 0;
+        }
+
+        .chart-item {
+            margin-bottom: 1rem;
+        }
+
+        .chart-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .chart-image-container:hover {
+            transform: scale(1.02);
+        }
+
+        .chart-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        /* 분석 결과 스타일 */
+        .hypothesis-results ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .hypothesis-results .descriptions {
+            background: var(--card-bg, #f8f9fa);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--card-border, #dee2e6);
+        }
+
+        .result {
+            background: #d1edff;
+            border: 1px solid #0ea5e9;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .no-images {
+            padding: 2rem;
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .chart-images .col-lg-4 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
     <title>전체 요소를 포함한 분석 결과</title>
 </head>
 <body>
@@ -23,7 +208,7 @@
         </div>
     </header>
     <div class="container">
-        <div class="hypothesis-section">
+        <div class="hypothesis-section" id="hypothesisSection">
             <ul>
                 {% for hypothesis in hypothesis_data %}
                 <li {% if forloop.first %}class="active"{% endif %}>
@@ -41,7 +226,7 @@
         <div class="carousel">
             {% for hypothesis in hypothesis_data %}
             <div id="hypo-{{ forloop.counter }}" 
-                 class="hypothesis-card card p-4 mb-4 shadow-sm {% if forloop.first %}active show{% endif %}">
+                 class="hypothesis-card card p-4 mb-4 shadow-sm {% if forloop.first %}active{% endif %}">
                 <h5 class="mb-3">
                     <i class="fas fa-microscope me-2"></i>
                     {{ hypothesis.title }}
@@ -61,6 +246,7 @@
                         </div>
                         {% endfor %}
                     {% else %}
+                    <!-- 차트 이미지 없을경우 대체 -->
                         <div class="no-images text-center text-muted col-12">
                             <i class="fas fa-image fa-3x mb-3"></i>
                             <p>해당 가설에 대한 차트 이미지가 없습니다.</p>
@@ -76,13 +262,15 @@
                         <i class="fas fa-chart-bar me-2"></i>
                         분석 결과
                     </h6>
-                    <ul>
-                        {% for key, value in hypothesis.results.items %}
-                            <li><strong>{{ key|capfirst }}:</strong> {{ value }}</li>
-                        {% endfor %}
-                    </ul>
+                    <div class="descriptions">
+                        <ul>
+                            {% for key, value in hypothesis.results.items %}
+                                <li class="pb-1"><strong>{{ key|capfirst }}:</strong> {{ value }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                     {% if hypothesis.conclusion %}
-                    <p class="result">
+                    <p class="result text-dark">
                         <i class="fas fa-check-circle me-2"></i>
                         {{ hypothesis.conclusion }}
                     </p>
@@ -95,17 +283,27 @@
         
     </div>
 
-    <!-- 캐러셀 JavaScript -->
+    <!-- 기존 JavaScript + 드롭다운 기능만 추가 -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const hypothesisSection = document.getElementById('hypothesisSection');
             const hypothesisLinks = document.querySelectorAll('.hypothesis-link');
             const hypothesisCards = document.querySelectorAll('.hypothesis-card');
 
             // 첫 번째 가설을 기본으로 표시
             showHypothesis('hypo-1');
 
-            // 각 링크에 클릭 이벤트 추가
-            hypothesisLinks.forEach(link => {
+            // 첫 번째 항목 클릭시 드롭다운 토글
+            const firstLink = hypothesisLinks[0];
+            firstLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                hypothesisSection.classList.toggle('open');
+            });
+
+            // 각 링크에 클릭 이벤트 추가 (첫 번째 제외)
+            hypothesisLinks.forEach((link, index) => {
+                if (index === 0) return; // 첫 번째는 토글용이므로 제외
+
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     
@@ -121,26 +319,35 @@
                     this.classList.add('active');
                     this.parentElement.classList.add('active');
                     
+                    // 선택된 제목을 첫 번째 항목으로 이동
+                    firstLink.textContent = this.textContent;
+                    firstLink.setAttribute('data-target', targetId);
+                    
+                    // 드롭다운 닫기
+                    hypothesisSection.classList.remove('open');
+                    
                     // 해당 가설 카드 표시
                     showHypothesis(targetId);
                 });
             });
 
+            // 외부 클릭시 드롭다운 닫기
+            document.addEventListener('click', function(e) {
+                if (!hypothesisSection.contains(e.target)) {
+                    hypothesisSection.classList.remove('open');
+                }
+            });
+
             function showHypothesis(targetId) {
-                // 모든 카드 숨기기
+                // 모든 카드에서 active 클래스 제거
                 hypothesisCards.forEach(card => {
-                    card.classList.remove('active', 'show');
+                    card.classList.remove('active');
                 });
 
-                // 대상 카드 표시
+                // 대상 카드에 active 클래스 추가
                 const targetCard = document.getElementById(targetId);
                 if (targetCard) {
                     targetCard.classList.add('active');
-                    
-                    // 부드러운 애니메이션을 위한 지연
-                    setTimeout(() => {
-                        targetCard.classList.add('show');
-                    }, 50);
                 }
             }
         });

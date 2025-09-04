@@ -164,6 +164,10 @@ hypothesis_data = {
     'jong': [
         {
             'title': '고혈압은 폐암 생존율에 영향을 미친다',
+            'hypothesis': {
+                        'h0': '고혈압은 폐암 생존율에 영향을 미친다',
+                        'h1': '고혈압은 폐암 생존율에 영향을 미치지 않는다'
+                    },
             'folder_path': 'images/jong_page/hypothesis_01',
             'images': load_images_from_static('images/jong_page/hypothesis_01', 'chart'),
             'results': {
@@ -174,7 +178,11 @@ hypothesis_data = {
             'conclusion': '고혈압은 폐암 생존율과 연관성이 있다.'
         },
         {
-            'title': '다른 암은 폐암 생존율에 영향을 미친다',
+            'title': '다른 암 보유 여부는 폐암 생존율에 영향을 미친다',
+            'hypothesis': {
+                    'h0': '다른 암 보유는 폐암 생존율에 영향을 미친다',
+                    'h1': '다른 암 보유는 폐암 생존율에 영향을 미치지 않는다'
+                    },
             'folder_path': 'images/jong_page/hypothesis_02',
             'images': load_images_from_static('images/jong_page/hypothesis_02', 'chart'),
             'results': {

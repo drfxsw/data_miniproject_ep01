@@ -1,7 +1,9 @@
 /* 글자관련 스타일 */
-h1,h2,h3,h4,h5,h6,a,p,div,span,li,button {
+h1,h2,h3,h4,h5,h6,a,p,div,span,ol,ul,li,button {
     font-family: 'Noto Sans KR', sans-serif;
     color: var(--text-primary);
+    padding: 0;
+    margin: 0;
 }
 
 header h1 {
@@ -20,4 +22,18 @@ header h2 {
     font-weight: 600;
     color: var(--text-primary);
     margin: 1.5rem 0 1rem;
+}
+
+h5 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 1rem 0 0.5rem;
+}
+
+h6 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 1rem 0 0.5rem;
 }

@@ -1,25 +1,85 @@
-/* 캐러셀 관련 스타일 */
-.hypothesis-section ul {
-    list-style: none;
-    justify-content: center;
+/* 드롭다운으로 보이게 하는 스타일 */
+.hypothesis-section {
+    position: relative;
+    width: 100%;
     margin-bottom: 2rem;
 }
 
-.hypothesis-section li {
+.hypothesis-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     background: var(--card-bg, #f8f9fa);
     border: 2px solid var(--card-border, #dee2e6);
-    border-radius: 25px;
+    border-radius: 12px;
+    position: relative;
+}
+
+.hypothesis-section ul::after {
+    content: '\f107';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    color: var(--accent-blue, #007bff);
+    pointer-events: none;
+}
+
+.hypothesis-section li {
+    background: transparent;
+    border: none;
+    border-radius: 0;
     transition: all 0.3s ease;
+}
+
+.hypothesis-section li:first-child {
+    border-radius: 12px 12px 0 0;
+}
+
+.hypothesis-section li:last-child {
+    border-radius: 0 0 12px 12px;
+}
+
+.hypothesis-section li:not(:first-child) {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hypothesis-section.open li:not(:first-child) {
+    max-height: 100px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hypothesis-section ul::after {
+    transition: transform 0.3s ease;
+}
+
+.hypothesis-section.open ul::after {
+    transform: rotate(180deg);
 }
 
 .hypothesis-link {
     display: block;
-    padding: 0.8rem 1.5rem;
-    text-decoration: none;
+    padding: 1rem 3rem 1rem 1.5rem;
     color: var(--text-primary, #333);
+    text-decoration: none;
     font-weight: 600;
-    border-radius: 25px;
+    border-radius: 0;
     transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.hypothesis-section li:last-child .hypothesis-link {
+    border-bottom: none;
+}
+
+.hypothesis-section li:first-child .hypothesis-link {
+    cursor: pointer;
 }
 
 .hypothesis-link:hover {
@@ -30,36 +90,33 @@
 
 .hypothesis-link.active {
     background: var(--accent-blue, #007bff);
+    border-radius: 12px 12px;
     color: white;
 }
 
-.hypothesis-section li.active {
-    border-color: var(--accent-blue, #007bff);
-    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
-}
-
-/* 캐러셀 카드들 */
+/* 애니메이션이 개선된 캐러셀 -  추가로 우선순위 확보 */
 .carousel {
-    position: relative;
-    min-height: 500px;
+    position: relative ;
 }
 
 .hypothesis-card {
-    display: none;
-    opacity: 0;
-    transform: translateX(20px);
-    transition: all 0.4s ease;
+    position: absolute ;
+    top: 0 ;
+    left: 0 ;
+    right: 0 ;
+    opacity: 0 ;
+    visibility: hidden ;
+    transform: translateY(20px) ;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ;
+    pointer-events: none ;
 }
 
 .hypothesis-card.active {
-    display: block;
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.hypothesis-card.show {
-    opacity: 1;
-    transform: translateX(0);
+    position: relative ;
+    opacity: 1 ;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: all;
 }
 
 /* 차트 이미지 스타일 */
@@ -89,13 +146,14 @@
     object-fit: cover;
 }
 
+/* 분석 결과 스타일 */
 .hypothesis-results ul {
     list-style: none;
     padding: 0;
 }
 
-.hypothesis-results li {
-    background: var(--card-bg, #f8f9fa);
+.hypothesis-results .descriptions {
+    background: var(--secondary-dark, #f8f9fa);
     padding: 0.5rem 1rem;
     border-radius: 8px;
     border: 1px solid var(--card-border, #dee2e6);
@@ -117,12 +175,7 @@
 
 /* 반응형 */
 @media (max-width: 768px) {
-    .hypothesis-section ul {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .chart-images .col-4 {
+    .chart-images .col-lg-4 {
         flex: 0 0 100%;
         max-width: 100%;
     }

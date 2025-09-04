@@ -100,6 +100,12 @@
                         {{ hypothesis.conclusion }}
                     </p>
                     {% endif %}
+                    {% if hypothesis.result %}
+                    <hr>
+                    <p class="mt-2">
+                        {{ hypothesis.result }}
+                    </p>
+                    {% endif %}
                 </div>
                 {% endif %}
             </div>

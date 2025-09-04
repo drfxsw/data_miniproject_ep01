@@ -277,20 +277,37 @@ hypothesis_data = {
     ],
     'tack': [
                 {
-                    'title': '가설 1',
+                    'title': '가설1: 기존 건강상태(폐암 외의 암, 고혈압)가 폐암 환자의 생존률에 영향을 준다.',
                     'hypothesis': {
-                                'h0': '귀무가설 내용',
-                                'h1': '대립가설 내용'
+                                'h0': '환자들의 기존 건강상태(폐암 외의 암, 고혈압)은 폐암에 의한 생존률에 독립적이다.',
+                                'h1': '환자들의 폐암 생존률은 환자의 기존 건강상태에 따라 좌우된다.'
                             },
                     'folder_path': 'images/tack_page/hypothesis_01',
                     'images': load_images_from_static('images/tack_page/hypothesis_01', 'chart'),
                     'results': {
-                        'p_value': '0.05',
-                        '적합도': '0.95',
-                        '샘플수': '100',
+                        'other_cancer': '0.258  >  0.05',
+                        'hypertension': ' 0.086  >  0.05',
+                        '상호작용': ' 0.491  >  0.05',
                     },
-                    'conclusion': '가설 1의 결과는 유의미합니다.',
-                    'result': '~~~~~~해서 여러모로 해봤으나 뭐 그러함'
+                    'conclusion': '환자의 기저질환은 폐암 생존률에 영향을 끼치지 못한다.',
+                    'result': 'ANOVA 검정 결과에 따르면, 고혈압(hypertension)은 유의수준 0.05에 근사한 값으로 여겨 그 종속변수(survived)와의 종속성을 용인할 수 있겠지만, 보수적인 시점에서는 독립적임으로 판단해야 합니다.따라서, 폐암 외의 질병(other_cancer)과 고혈압(hypertension)은 단원제 혹은 다원제의 상황 모두 대립가설을 기각하고 귀무가설을 채택합니다.'
+                },
+
+                {
+                    'title': '가설2: 암 진단으로부터 최초 치유 착수기간이 짧을수록 환자의 생존율이 높다.',
+                    'hypothesis': {
+                                'h0': ' 환자들의 최초 암 진단으로부터 치유기간과, 발견한 암 단계는 생존률에 영향을 끼친다.',
+                                'h1': '환자들의 폐암 생존율은 최초 암의 단계와 그 정체 발견에 달려있다.'
+                            },
+                    'folder_path': 'images/tack_page/hypothesis_01',
+                    'images': load_images_from_static('images/tack_page/hypothesis_02', 'chart'),
+                    'results': {
+                        'initiate_treatment_days': '0.208  >  0.05',
+                        'cancer_stage': '0.943  >  0.05',
+                        '상호작용': '0.515  >  0.05',
+                    },
+                    'conclusion': '환자의 생존률, 암 진단으로부터 치유 개시 시간은 환자의 폐암 생존율에 영향을 끼치지 못한다.',
+                    'result': 'ANOVA 검정 결과에 따라 대립가설을 기각하고, 환자의 생존율(survived)은 치유착수기간(initiate_treatment_days)이나 진단받은 암의 기수(cancer_stage)와는 “상관관계가 없음”을 알 수 있다.'
                 },
     ]
 }

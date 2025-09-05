@@ -115,38 +115,6 @@ hypothesis_data = {
                     'conclusion': '가설 1의 결과는 유의미합니다.',
                     'result': '~~~~~~해서 여러모로 해봤으나 뭐 그러함'
                 },
-                {
-                    'title': '가설 2',
-                    'hypothesis': {
-                        'h0': '귀무가설 내용',
-                        'h1': '대립가설 내용'
-                    },
-                    'folder_path': 'images/final_page/hypothesis_02',
-                    'images': load_images_from_static('images/final_page/hypothesis_02', 'chart'),
-                    'results': {
-                        'p_value': '0.02',
-                        '적합도': '0.45',
-                        '샘플수': '100',
-                    },
-                    'conclusion': '가설 2의 결과는 무의미합니다.',
-                    'result': '~~~~~~해서 여러모로 해봤으나 뭐 그러함'
-                },
-                {
-                    'title': '가설 3',
-                    'hypothesis': {
-                        'h0': '귀무가설 내용',
-                        'h1': '대립가설 내용'
-                    },
-                    'folder_path': 'images/final_page/hypothesis_03',
-                    'images': load_images_from_static('images/final_page/hypothesis_03', 'chart'),
-                    'results': {
-                        'p_value': '0.03',
-                        '적합도': '0.78',
-                        '샘플수': '100',
-                    },
-                    'conclusion': '가설 3의 결과는 유의미합니다.',
-                    'result': '~~~~~~해서 여러모로 해봤으나 뭐 그러함'
-                }
             ],
     'sol': [
                 {

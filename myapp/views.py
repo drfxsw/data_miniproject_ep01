@@ -32,13 +32,211 @@ def dashboard(request):
         }
     ]
 
-    # 종합결론 설명용 차트
+    # 종합결론 설명용 차트이미지
     images= load_images_from_static('images/dashboard', 'chart') #이미지파일경로, 파일명공통접두어
+
+    # 종합결론 분석 테이블 데이터
+    analysis_data = [
+        {
+            'title': 'Gender 분석',
+            'emoji': '📊',
+            'col_class': 'col-lg-12 col-xl-6 mb-3',
+            'headers': ['구분', '총환자수', '생존자수', '생존율'],
+            'data': [
+                {'category': 'Female', 'total': '524,997', 'survived': '114,995', 'rate': '21.90%'},
+                {'category': 'Male', 'total': '523,578', 'survived': '115,137', 'rate': '21.99%'},
+            ],
+            'stats': {
+                'survival_range': '0.0009 (0.09%)',
+                'p_value': '0.285745',
+                'significance': '유의하지 않음',
+                'significance_class': 'bg-secondary',
+                'suspicious_equality': '예'
+            }
+        },
+        {
+            'title': 'Cancer Stage 분석',
+            'emoji': '📊',
+            'col_class': 'col-lg-12 col-xl-6 mb-3',
+            'headers': ['구분', '총환자수', '생존자수', '생존율'],
+            'data': [
+                {'category': 'Stage I', 'total': '262,068', 'survived': '57,507', 'rate': '21.94%'},
+                {'category': 'Stage II', 'total': '262,357', 'survived': '57,541', 'rate': '21.93%'},
+                {'category': 'Stage III', 'total': '262,196', 'survived': '57,526', 'rate': '21.94%'},
+                {'category': 'Stage IV', 'total': '261,954', 'survived': '57,558', 'rate': '21.97%'},
+            ],
+            'stats': {
+                'survival_range': '0.0004 (0.04%)',
+                'p_value': '0.986355',
+                'significance': '유의하지 않음',
+                'significance_class': 'bg-secondary',
+                'suspicious_equality': '예'
+            }
+        },
+        {
+            'title': 'Family History 분석',
+            'emoji': '📊',
+            'col_class': 'col-lg-12 col-xl-6 mb-3',
+            'headers': ['구분', '총환자수', '생존자수', '생존율'],
+            'data': [
+                {'category': 'No', 'total': '524,074', 'survived': '114,819', 'rate': '21.91%'},
+                {'category': 'Yes', 'total': '524,501', 'survived': '115,313', 'rate': '21.99%'},
+            ],
+            'stats': {
+                'survival_range': '0.0008 (0.08%)',
+                'p_value': '0.346137',
+                'significance': '유의하지 않음',
+                'significance_class': 'bg-secondary',
+                'suspicious_equality': '예'
+            }
+        },
+        {
+            'title': 'Smoking Status 분석',
+            'emoji': '📊',
+            'col_class': 'col-lg-12 col-xl-6 mb-3',
+            'headers': ['구분', '총환자수', '생존자수', '생존율'],
+            'data': [
+                {'category': 'Current Smoker', 'total': '262,060', 'survived': '57,433', 'rate': '21.92%'},
+                {'category': 'Former Smoker', 'total': '261,789', 'survived': '57,390', 'rate': '21.92%'},
+                {'category': 'Never Smoked', 'total': '262,160', 'survived': '57,640', 'rate': '21.99%'},
+                {'category': 'Passive Smoker', 'total': '262,566', 'survived': '57,669', 'rate': '21.96%'},
+            ],
+            'stats': {
+                'survival_range': '0.0007 (0.07%)',
+                'p_value': '0.913813',
+                'significance': '유의하지 않음',
+                'significance_class': 'bg-secondary',
+                'suspicious_equality': '예'
+            }
+        },
+        {
+            'title': 'Treatment Type 분석',
+            'emoji': '📊',
+            'col_class': 'col-lg-12 col-xl-6 mb-3',
+            'headers': ['구분', '총환자수', '생존자수', '생존율'],
+            'data': [
+                {'category': 'Chemotherapy', 'total': '262,628', 'survived': '57,670', 'rate': '21.96%'},
+                {'category': 'Combined', 'total': '261,666', 'survived': '57,085', 'rate': '21.82%'},
+                {'category': 'Radiation', 'total': '261,855', 'survived': '57,566', 'rate': '21.98%'},
+                {'category': 'Surgery', 'total': '262,426', 'survived': '57,811', 'rate': '22.03%'},
+            ],
+            'stats': {
+                'survival_range': '0.0021 (0.21%)',
+                'p_value': '0.273216',
+                'significance': '유의하지 않음',
+                'significance_class': 'bg-secondary',
+                'suspicious_equality': '예'
+            }
+        },
+        {
+            'title': 'Age Group 분석',
+            'emoji': '📊',
+            'col_class': 'col-lg-12 col-xl-6 mb-3',
+            'headers': ['구분', '총환자수', '생존자수', '생존율'],
+            'data': [
+                {'category': 'Young(<40)', 'total': '76,904', 'survived': '16,819', 'rate': '21.87%'},
+                {'category': 'Middle(40-55)', 'total': '468,253', 'survived': '102,504', 'rate': '21.89%'},
+                {'category': 'Senior(55-70)', 'total': '439,960', 'survived': '96,938', 'rate': '22.03%'},
+                {'category': 'Elderly(70+)', 'total': '63,456', 'survived': '13,870', 'rate': '21.86%'},
+            ],
+            'stats': {
+                'survival_range': '0.0017 (0.17%)',
+                'p_value': '0.341812',
+                'significance': '유의하지 않음',
+                'significance_class': 'bg-secondary',
+                'suspicious_equality': '예'
+            }
+        },
+        {
+            'title': 'BMI Category 분석',
+            'emoji': '📊',
+            'col_class': 'col-lg-12 col-xl-6 mb-3',
+            'headers': ['구분', '총환자수', '생존자수', '생존율'],
+            'data': [
+                {'category': 'Underweight', 'total': '92,228', 'survived': '20,312', 'rate': '22.02%'},
+                {'category': 'Normal', 'total': '235,826', 'survived': '51,774', 'rate': '21.95%'},
+                {'category': 'Overweight', 'total': '180,845', 'survived': '39,593', 'rate': '21.89%'},
+                {'category': 'Obese', 'total': '539,676', 'survived': '118,453', 'rate': '21.95%'},
+            ],
+            'stats': {
+                'survival_range': '0.0013 (0.13%)',
+                'p_value': '0.889732',
+                'significance': '유의하지 않음',
+                'significance_class': 'bg-secondary',
+                'suspicious_equality': '예'
+            }
+        },
+        {
+            'title': 'Cholesterol Category 분석',
+            'emoji': '📊',
+            'col_class': 'col-lg-12 col-xl-6 mb-3',
+            'headers': ['구분', '총환자수', '생존자수', '생존율'],
+            'data': [
+                {'category': 'Normal', 'total': '285,359', 'survived': '62,605', 'rate': '21.94%'},
+                {'category': 'Borderline', 'total': '227,945', 'survived': '50,050', 'rate': '21.96%'},
+                {'category': 'High', 'total': '535,271', 'survived': '117,477', 'rate': '21.95%'},
+            ],
+            'stats': {
+                'survival_range': '0.0002 (0.02%)',
+                'p_value': '0.988059',
+                'significance': '유의하지 않음',
+                'significance_class': 'bg-secondary',
+                'suspicious_equality': '예'
+            }
+        },
+        {
+            'title': 'Comorbidity Category 분석',
+            'emoji': '📊',
+            'col_class': 'col-lg-12 col-xl-6 mb-3',
+            'headers': ['구분', '총환자수', '생존자수', '생존율'],
+            'data': [
+                {'category': 'None', 'total': '145,073', 'survived': '31,605', 'rate': '21.79%'},
+                {'category': 'Single', 'total': '349,474', 'survived': '76,817', 'rate': '21.98%'},
+                {'category': 'Multiple', 'total': '414,498', 'survived': '91,179', 'rate': '22.00%'},
+                {'category': 'Severe', 'total': '139,530', 'survived': '30,531', 'rate': '21.88%'},
+            ],
+            'stats': {
+                'survival_range': '0.0021 (0.21%)',
+                'p_value': '0.333129',
+                'significance': '유의하지 않음',
+                'significance_class': 'bg-secondary',
+                'suspicious_equality': '예'
+            }
+        },
+        {
+            'title': 'Major Country 분석',
+            'emoji': '📊',
+            'col_class': 'col-12 mb-4',
+            'headers': ['구분', '총환자수', '생존자수', '생존율', '구분', '총환자수', '생존자수', '생존율'],
+            'data': [
+                {'category': 'Croatia', 'total': '38,900', 'survived': '8,567', 'rate': '22.02%',
+                 'category2': 'Lithuania', 'total2': '38,964', 'survived2': '8,543', 'rate2': '21.93%'},
+                {'category': 'Cyprus', 'total': '38,972', 'survived': '8,617', 'rate': '22.11%',
+                 'category2': 'Malta', 'total2': '38,971', 'survived2': '8,529', 'rate2': '21.89%'},
+                {'category': 'Czech Republic', 'total': '39,187', 'survived': '8,642', 'rate': '22.05%',
+                 'category2': 'Netherlands', 'total2': '38,899', 'survived2': '8,657', 'rate2': '22.26%'},
+                {'category': 'Denmark', 'total': '39,056', 'survived': '8,503', 'rate': '21.77%',
+                 'category2': 'Poland', 'total2': '39,166', 'survived2': '8,533', 'rate2': '21.79%'},
+                {'category': 'Hungary', 'total': '39,020', 'survived': '8,568', 'rate': '21.96%',
+                 'category2': 'Other', 'total2': '658,476', 'survived2': '144,555', 'rate2': '21.95%'},
+                {'category': 'Italy', 'total': '38,964', 'survived': '8,418', 'rate': '21.60%'},
+            ],
+            'stats': {
+                'survival_range': '0.0066 (0.66%)',
+                'p_value': '0.703931',
+                'significance': '유의하지 않음',
+                'significance_class': 'bg-secondary',
+                'suspicious_equality': '예'
+            },
+            'is_country_table': True  # 특별한 테이블 구조 표시
+        }
+    ]
 
 
     context = {
         'team_data': team_data,
-        'images': images
+        'images': images,
+        'analysis_data': analysis_data
     }
     # 3-2-2
     return render(request, "index.html", context) # 일반적으로 가장 root에 있는 html명은 index를 사용
